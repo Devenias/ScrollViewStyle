@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIIntrospect
+@_spi(Advanced) import SwiftUIIntrospect
 
 internal struct ScrollViewStyleModifider<Style: ScrollViewStyle>: ViewModifier {
     @StateObject internal var coordinator: Style.ScrollCoordinator
@@ -17,7 +17,7 @@ internal struct ScrollViewStyleModifider<Style: ScrollViewStyle>: ViewModifier {
     }
     internal func body(content: Content) -> some View {
         content
-            .introspect(.scrollView, on: .iOS(.v15...)) { scrollView in
+            .introspect(.scrollView, on: .iOS(.v13...)) { scrollView in
                 style.make(uiScrollView: scrollView)
                 scrollView.delegate = coordinator
             }
